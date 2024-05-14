@@ -19,7 +19,9 @@ Then, download our publicly released datasets from (Zenodo link embargoed) and p
 
 Finally, to get the public release of our data formatted for use with these notebooks, just run:
 
-```python quick_setup.py```
+```
+python quick_setup.py
+```
 
 This will also unzip the directories that are needed to save plots, results, data, etc. Note that this will require an installation of the `anndata` package (any version will do) or you can set up one our conda environments (which will be needed to run the notebooks) following the instructions in the following section.
 
