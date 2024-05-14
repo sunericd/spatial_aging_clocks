@@ -1,3 +1,13 @@
+'''
+ARCHIVED SCRIPT
+Runs preprocessing and initial Leiden clustering for combined datasets 
+
+Inputs required: integrated AnnData objects from preprocessing_for_merfish_data.py
+
+Conda environment used: `requirements/merfish.txt`
+'''
+
+
 import scanpy as sc
 import squidpy as sq
 import pandas as pd
@@ -36,7 +46,7 @@ for fn in filenames_to_prepare:
     sc.pp.scale(adata, max_value=10)
 
 
-    # run pca and Harmony integration of aging and exercise
+    # run pca
     sc.tl.pca(adata)
 
     # add batch variable (independent)

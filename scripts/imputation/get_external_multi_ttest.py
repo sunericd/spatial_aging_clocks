@@ -1,7 +1,7 @@
 '''
 Runs TISSUE multiple imputation t-test on all genes in RNAseq data (whole transcriptome) or on a list of unseen genes.
 
-Example: python get_external_multi_ttest.py Dataset13 subclass_genes.txt 100 celltype none none 4 1 knn_spage_tangram --non-symmetric
+Conda environment used: `requirements/geneimputation.txt`
 '''
 
 import numpy as np
@@ -103,11 +103,19 @@ adata = adata[:, gene_names]
 # build spatial graph
 build_spatial_graph(adata, method="fixed_radius", n_neighbors=15)
 
+# run-time results
+method_col = []
+predict_time_col = []
+conformalize_time_col = []
+dgea_time_col = []
 
 # iterate through different methods and: (1) impute gene expression, (2) compute calibration scores, (3) run DGEA with MI
 for method in methods:
+
+    method_col.append(method)
     
     # (1) impute gene expression
+    start_time = time.time()
     if method == "spage":
         if len(adata.var_names) < 40:
             n_pv = 20
@@ -122,19 +130,22 @@ for method in methods:
     else:
         predict_gene_expression (adata, RNAseq_adata, target_genes,
                                  method=method, n_folds=10)
+    predict_time_col.append(time.time() - start_time)
     
     # (2) compute calibration scores
+    start_time = time.time()
     predicted = method+"_predicted_expression"
     calib_genes = [gene for gene in gene_names if gene not in target_genes]
     conformalize_spatial_uncertainty(adata, predicted, calib_genes, weight="exp_cos", mean_normalized=False, add_one=True,
-                                     grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15)
-                                     
+                                     grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15, n_pc2=15)
+    conformalize_time_col.append(time.time() - start_time)                                 
                    
     # (3) run DGEA with MI
+    start_time = time.time()
     keys_list = multiple_imputation_testing (adata, predicted, calib_genes, condition, n_imputations=n_imputations,
                                              group1=group1, group2=group2, symmetric=symmetric, return_keys=True,
                                              save_mi=sig_dirpath)
-
+    dgea_time_col.append(time.time() - start_time)
 
 # Save results
 try:
@@ -149,3 +160,11 @@ try:
 except:
     large_save(adata, savedir+"/"+dataset_name+"_"+"_".join(methods)+f"_MI_EXTERNAL_TTEST_{condition}_{group1}")
     os.remove(savedir+"/"+dataset_name+"_"+"_".join(methods)+f"_MI_EXTERNAL_TTEST_{condition}_{group1}.h5ad")
+    
+# save runtimes as dataframe
+rt_df = pd.DataFrame([])
+rt_df["method"] = method_col
+rt_df["predict_time"] = predict_time_col
+rt_df["conformalize_time"] = conformalize_time_col
+rt_df["dgea_time"] = dgea_time_col
+rt_df.to_csv(savedir+"/"+"runtimes_"+dataset_name+"_"+"_".join(methods)+f"_MI_EXTERNAL_TTEST_{condition}_{group1}.csv", index=False)

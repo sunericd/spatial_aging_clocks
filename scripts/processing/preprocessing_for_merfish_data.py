@@ -1,13 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+'''
+ARCHIVED SCRIPT
+Runs processing of individual MERFISH samples, maps metadata, and combines into datasets
 
-# # Preprocessing of MERFISH data for downstream analysis
-# 
+Inputs required: AnnData objects from scg_create_anndata.py
+
 # - Converts the CSV count matrix files to AnnData format
 # - Performs quality filtering of cells
 # - Maps on age, mouse, and sample metadata values
 # - Integrates data into AnnData objects
 
+Conda environment used: `requirements/merfish.txt`
+'''
 
 import scanpy as sc
 import squidpy as sq
@@ -62,8 +65,6 @@ for fn in os.listdir(raw_dir):
 # ### Map on additional metadata to anndata objects
 
 # dicts for mapping
-
-# corrections 3/6/23: 42 and 7 swapped, 
 
 file_to_mouseid_dict = {
     '202301301605_MsBrain-VS62-OC4-OE3-BW_VMSC07101_region_0.h5ad': "OE3",

@@ -2,7 +2,7 @@
 Makes and saves gene expression predictions made on cross-validation folds.
 This script should be run first to generate the intermediate results that are necessary for other analyses.
 
-Example: python spatial_conformal_uncertainty.py Dataset15 10 10 4 1 knn_spage_tangram --save_intermediate --non-symmetric
+Conda environment used: `requirements/geneimputation.txt`
 '''
 
 import numpy as np
@@ -183,7 +183,7 @@ for method in methods:
         # Conformalize and save
         sub_adatac = sub_adata.copy()
         conformalize_spatial_uncertainty(sub_adatac, predicted, calib_genes, weight="exp_cos", mean_normalized=False, add_one=True,
-                                         grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15)
+                                         grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15, n_pc2=15)
         
         conformalize_time_col.append(time.time() - start_time)
         

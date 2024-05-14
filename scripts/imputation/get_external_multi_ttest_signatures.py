@@ -1,7 +1,7 @@
 '''
-Runs TISSUE multiple imputation t-test on all genes in RNAseq data (whole transcriptome) or on a list of unseen genes.
+Runs TISSUE multiple imputation t-test on different gene signatures
 
-Example: python get_external_multi_ttest.py Dataset13 subclass_genes.txt 100 celltype none none 4 1 knn_spage_tangram --non-symmetric
+Conda environment used: `requirements/geneimputation.txt`
 '''
 
 import numpy as np
@@ -127,7 +127,7 @@ for method in methods:
     predicted = method+"_predicted_expression"
     calib_genes = [gene for gene in gene_names if gene not in target_genes]
     conformalize_spatial_uncertainty(adata, predicted, calib_genes, weight="exp_cos", mean_normalized=False, add_one=True,
-                                     grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15)
+                                     grouping_method="kmeans_gene_cell", k=k_gene, k2=k_cell, n_pc=15, n_pc2=15)
                                      
                    
     # (3) run gene signatures testing with MI

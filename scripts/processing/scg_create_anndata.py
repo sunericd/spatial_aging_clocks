@@ -1,3 +1,13 @@
+'''
+ARCHIVED SCRIPT
+Runs processing of Vizgen lab service data outputs into AnnData format
+
+Inputs required: "analyzed_data" directory with Vizgen lab service outputs
+
+Conda environment used: `requirements/merfish.txt`
+'''
+
+
 # code to run on SCG
 import anndata as ad
 import scanpy as sc
@@ -9,29 +19,29 @@ import numpy as np
 
 
 
-# # For Batch 1
-# top_dir = "analyzed_data"
-# seg_dir = "Cellpose_DAPI_polyT"
-# data_fn = "cellpose_cell_by_gene.csv"
-# meta_fn = "cellpose_cell_metadata.csv"
+# For Batch 1
+top_dir = "analyzed_data"
+seg_dir = "Cellpose_DAPI_polyT"
+data_fn = "cellpose_cell_by_gene.csv"
+meta_fn = "cellpose_cell_metadata.csv"
 
-# # search through directories
-# for slide in os.listdir(top_dir):
-    # if os.path.isdir(os.path.join(top_dir,slide)):
-        # for region in os.listdir(os.path.join(top_dir,slide)):
-            # if ("region" in region) and (os.path.isdir(os.path.join(top_dir,slide,region))):
-                # pathdir = os.path.join(top_dir,slide,region,seg_dir)
+# search through directories
+for slide in os.listdir(top_dir):
+    if os.path.isdir(os.path.join(top_dir,slide)):
+        for region in os.listdir(os.path.join(top_dir,slide)):
+            if ("region" in region) and (os.path.isdir(os.path.join(top_dir,slide,region))):
+                pathdir = os.path.join(top_dir,slide,region,seg_dir)
                 
-                # # read in and make anndata object
-                # adata = sc.read_csv(os.path.join(pathdir,data_fn), first_column_names=True)
-                # metadata = pd.read_csv(os.path.join(pathdir,meta_fn), index_col=0)
-                # metadata.index = adata.obs_names
-                # adata.obs = metadata
-                # adata.obsm['spatial'] = adata.obs[["center_x", "center_y"]].to_numpy()
+                # read in and make anndata object
+                adata = sc.read_csv(os.path.join(pathdir,data_fn), first_column_names=True)
+                metadata = pd.read_csv(os.path.join(pathdir,meta_fn), index_col=0)
+                metadata.index = adata.obs_names
+                adata.obs = metadata
+                adata.obsm['spatial'] = adata.obs[["center_x", "center_y"]].to_numpy()
                 
-                # # save anndata
-                # save_name = f"{slide}_{region}.h5ad"
-                # adata.write_h5ad(os.path.join("anndata",save_name))
+                # save anndata
+                save_name = f"{slide}_{region}.h5ad"
+                adata.write_h5ad(os.path.join("anndata",save_name))
                 
 # For Batch 2
 top_dir = "batch2_data"
@@ -60,25 +70,25 @@ for slide in os.listdir(top_dir):
 
                 
                 
-# # For Pilot Data
-# top_dir = "pilot/analyzed_data"
-# data_fn = "cell_by_gene.csv"
-# meta_fn = "cell_metadata.csv"
+# For Pilot Data
+top_dir = "pilot/analyzed_data"
+data_fn = "cell_by_gene.csv"
+meta_fn = "cell_metadata.csv"
 
-# # search through directories
-# for slide in os.listdir(top_dir):
-    # if os.path.isdir(os.path.join(top_dir,slide)):
-        # for region in os.listdir(os.path.join(top_dir,slide)):
-            # if ("region" in region) and (os.path.isdir(os.path.join(top_dir,slide,region))):
-                # pathdir = os.path.join(top_dir,slide,region)
+# search through directories
+for slide in os.listdir(top_dir):
+    if os.path.isdir(os.path.join(top_dir,slide)):
+        for region in os.listdir(os.path.join(top_dir,slide)):
+            if ("region" in region) and (os.path.isdir(os.path.join(top_dir,slide,region))):
+                pathdir = os.path.join(top_dir,slide,region)
                 
-                # # read in and make anndata object
-                # adata = sc.read_csv(os.path.join(pathdir,data_fn), first_column_names=True)
-                # metadata = pd.read_csv(os.path.join(pathdir,meta_fn), index_col=0)
-                # metadata.index = adata.obs_names
-                # adata.obs = metadata
-                # adata.obsm['spatial'] = adata.obs[["center_x", "center_y"]].to_numpy()
+                # read in and make anndata object
+                adata = sc.read_csv(os.path.join(pathdir,data_fn), first_column_names=True)
+                metadata = pd.read_csv(os.path.join(pathdir,meta_fn), index_col=0)
+                metadata.index = adata.obs_names
+                adata.obs = metadata
+                adata.obsm['spatial'] = adata.obs[["center_x", "center_y"]].to_numpy()
                 
-                # # save anndata
-                # save_name = f"{slide}_{region}.h5ad"
-                # adata.write_h5ad(os.path.join("pilot","anndata",save_name))
+                # save anndata
+                save_name = f"{slide}_{region}.h5ad"
+                adata.write_h5ad(os.path.join("pilot","anndata",save_name))

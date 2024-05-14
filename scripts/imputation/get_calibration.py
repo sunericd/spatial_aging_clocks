@@ -1,7 +1,7 @@
 '''
 Runs calibration across different alpha levels and saves TISSUE prediction intervals and calibration results
 
-Example: python get_calibration.py SCPI_k4_k1 Dataset15 knn_spage_tangram --non-symmetric
+Conda environment used: `requirements/geneimputation.txt`
 '''
 
 import numpy as np
