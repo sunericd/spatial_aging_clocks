@@ -9,9 +9,11 @@ If you are interested in applying our spatial aging clocks to make predictions o
 
 First, clone our Github repository:
 
-```git clone https://github.com/sunericd/spatial_aging_clocks.git```
+```
+git clone https://github.com/sunericd/spatial_aging_clocks.git
 
-```cd spatial_aging_clocks```
+cd spatial_aging_clocks
+```
 
 Then, download our publicly released datasets from (Zenodo link embargoed) and put the .h5ad files into the home directory of this repository.
 
