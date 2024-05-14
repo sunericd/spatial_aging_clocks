@@ -10,6 +10,7 @@ If you are interested in applying our spatial aging clocks to make predictions o
 First, clone our Github repository:
 
 ```git clone https://github.com/sunericd/spatial_aging_clocks.git```
+
 ```cd spatial_aging_clocks```
 
 Then, download our publicly released datasets from (Zenodo link embargoed) and put the .h5ad files into the home directory of this repository.
@@ -29,7 +30,7 @@ To set up a conda environment for these analyses, we recommend installing all de
 
 Jupyter notebooks containing code for making figures and running simulations for all results can be found in the top-level directory.
 
-#### (1) Cell type and region annotation (these are archival):
+### 1. Cell type and region annotation (these are archival):
 - ```1A_clustering_and_cell_types_aging.ipynb``` - cell type annotation and visualization for aging coronal dataset
 - ```1A_clustering_and_cell_types_exercise.ipynb``` - cell type annotation and visualization for exercise coronal dataset
 - ```1A_clustering_and_cell_types_reprogramming.ipynb``` - cell type annotation and visualization for partial reprogramming coronal dataset
@@ -39,14 +40,14 @@ Jupyter notebooks containing code for making figures and running simulations for
 - ```1D_metadata_integration.ipynb``` - generates supplementary table with sample information for all datasets
 
 
-#### (2) Cell type composition and gene expression changes:
+### 2. Cell type composition and gene expression changes:
 - ```2A_cortical_layer_markers.ipynb``` - cortical layer marker analysis for cortical subregions
 - ```2B_cell_type_composition_analysis.ipynb``` - cell type composition and proportion changes with age and with exercise/partial reprogramming
 - ```2C_differential_gene_expression_analysis.ipynb``` - increasing/decreasing genes with age and visualization of GO biological process enrichment; differential gene expression analysis for exercise/reprogramming
 - ```2D_gene_trajectory_analysis.ipynb``` - cell type-specific and region-specific gene expression trajectory fingerprints with age 
 
 
-### (3) Spatial aging clocks
+### 3. Spatial aging clocks
 - ```3A_clocks_single_cell.ipynb``` - visualization and evaluation of spatial single-cell aging clocks
 - ```3B_clocks_single_cell_regional.ipynb``` - visualization of region-specific spatial single-cell aging clocks and benchmark performance against global spatial aging clock
 - ```3C_clocks_genes.ipynb``` - tabulation of features used in each spatial aging clock and GO term enrichment
@@ -54,13 +55,13 @@ Jupyter notebooks containing code for making figures and running simulations for
 - ```3E_clocks_external_validation.ipynb``` - application of spatial aging clocks to validation datasets
 
 
-### (4) Rejuvenation and adverse interventions
+### 4. Rejuvenation and adverse interventions
 - ```4A_application_to_interventions.ipynb``` - application and evaluation of spatial aging clocks across different rejuvenating and adverse interventions
 - ```4B_LPS_opc_oligodendrocyte_inflammation.ipynb``` - inflammation signature for oligodendrocytes and OPCs in LPS dataset
 - ```4C_mean_imputation_alternative.ipynb``` - results using mean imputation for spatial aging clocks on interventions datasets
 
 
-### (5) Cell proximity effects
+### 5. Cell proximity effects
 - ```5A_cell_proximity_equality_of_variances.ipynb``` - Levene's test for age acceleration between near and far cells
 - ```5A_regional_proximity_distance_cutoffs.ipynb``` - determination of unit distance cutoffs for proximity analysis
 - ```5B_cell_proximity_aging_analysis.ipynb``` - calculation and analysis of proximity effects
@@ -72,7 +73,7 @@ Jupyter notebooks containing code for making figures and running simulations for
 - ```5F_GNN_perturbation_modeling.ipynb``` - GNN modeling for in silico perturbations of T cells and NSCs in local cell graphs
 
 
-### (6) Potential mediators of proximity effects
+### 6. Potential mediators of proximity effects
 - ```6A_cellular_proximity_imputation_setup.ipynb``` - setup datasets for TISSUE imputation of whole-transcriptome spatial gene expression and testing
 - ```6B_cellular_proximity_imputation_QC.ipynb``` - evaluation of imputation performance and TISSUE calibration quality
 - ```6C_cellular_proximity_imputation_dgea.ipynb``` - unbiased differential gene expression analysis on imputed expression for mediating pathways of proximity effects
@@ -81,7 +82,7 @@ Jupyter notebooks containing code for making figures and running simulations for
 - ```6E_immunofluorescence_proximity_analysis.ipynb``` - analysis of immunofluorescence images for validating cell proximity effect mediators
 
 
-### (7) Reproducibility on independent cohorts
+### 7. Reproducibility on independent cohorts
 - ```7A_batch_separated_reproducibility.ipynb``` - miscellaneous analyses using the two independent cohorts of the coronal section dataset separately
 
 
