@@ -4,6 +4,7 @@ Reformats the public release of data to be compatible with notebooks
 '''
 
 import anndata as ad
+import numpy as np
 import os
 
 # Make directory structure
@@ -49,6 +50,7 @@ directories_to_make = ["data/",
                        "results/preprocessing",
                        "results/proximity"]
 
+print ("Making directory structure...")
 for directory in directories_to_make:
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -65,7 +67,7 @@ new_filenames = ["integrated_aging_coronal_celltyped_regioned_raw",
                  "integrated_exercise_coronal_celltyped_regioned_raw",
                  "integrated_reprogramming_coronal_celltyped_regioned_raw"]
 
-
+print ("Reformatting datasets...")
 for i in range(len(public_filenames)):
 
     # Read in public data (should have in data/ folder)
@@ -80,3 +82,6 @@ for i in range(len(public_filenames)):
     
     # Save new data file
     adata.write_h5ad(f"data/{new_filenames[i]}.h5ad")
+    print(f"reformatted dataset saved at data/{new_filenames[i]}.h5ad")
+    
+print("DONE!")

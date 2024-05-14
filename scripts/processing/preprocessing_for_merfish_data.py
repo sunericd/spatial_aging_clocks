@@ -20,6 +20,9 @@ import numpy as np
 import anndata as ad
 import os
 
+os.chdir("../..")
+
+
 
 raw_dir = "data/anndata_raw"
 save_dir = "data/anndata_processed"

@@ -42,7 +42,8 @@ from torch.nn.modules.loss import _Loss
 
 import argparse
 
-os.chdir("..")
+os.chdir("../..")
+
 
 # set up arguments
 parser = argparse.ArgumentParser()

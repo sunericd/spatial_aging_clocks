@@ -26,10 +26,13 @@ matplotlib.rcParams['ps.fonttype'] = 42
 from matplotlib.collections import PatchCollection
 import seaborn as sns
 
+import sys
+sys.path.append("/".join(os.getcwd().split("/")[:-2]))
+
 from clock_preprocessing import *
 
+os.chdir("../..")
 
-os.chdir("..")
 
 # array of k values to try for SpatialSmooth
 k_arr = np.array([5,10,15,25,30,35,40])
@@ -39,7 +42,6 @@ for k in k_arr:
 
     # read data and init
     adata = sc.read_h5ad("data/integrated_aging_coronal_celltyped_regioned_raw.h5ad")
-    adata = adata[(adata.obs.clusters!="1")&(adata.obs.mouse_id!="89")&(adata.obs.mouse_id!="67")].copy()
 
     celltypes = np.unique(adata.obs['celltype'])
 

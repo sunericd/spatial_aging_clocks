@@ -16,6 +16,8 @@ import anndata as ad
 import os
 from scipy.stats import pearsonr, spearmanr
 
+os.chdir("../..")
+
 
 # DATASETS WITH MULTIPLE BATCHES
 

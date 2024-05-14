@@ -15,6 +15,9 @@ import pandas as pd
 import os
 import numpy as np
 
+os.chdir("../..")
+
+
 # NOTE: Block comment/uncomment the sections to process different datasets
 
 

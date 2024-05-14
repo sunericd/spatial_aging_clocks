@@ -102,7 +102,7 @@ These Python files contain helper functions that are imported across multiple no
 
 ## Overview of scripts
 
-Python scripts for processing data, training clocks, running imputation, and generating intermediate data files are included in ```scripts```. **To run these files, move them from "scripts" to the home directory (one level up)**:
+Python scripts for processing data, training clocks, running imputation, and generating intermediate data files are included in ```scripts```. **To run these files, see the slurm_jobs directories for example arguments, and run the script in their current directory**:
 - ```train_clocks``` - contains scripts and job parameters for running cross-validated predictions with spatial aging clocks, training spatial aging clocks on the full datasets, and training region-specific aging clocks
 - ```gnn_model``` - contains scripts and job parameters for running the dataset generation and training of the GNN model for predicting neighborhood aging
 - ```imputation``` - contains scripts and job parameters for running TISSUE imputation and hypothesis testing for gene expression (```get_external_multi_ttest.py```) and for gene signatures (```get_external_multi_ttest_signatures.py```)

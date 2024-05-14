@@ -16,6 +16,8 @@ import anndata as ad
 import os
 from scipy.stats import pearsonr, spearmanr
 
+os.chdir("../..")
+
 # CORONAL
 adata = sc.read_h5ad("data/integrated_aging_coronal_clustered.h5ad")
 adata = adata[(adata.obs.clusters!="1")&(adata.obs.mouse_id!="89")&(adata.obs.mouse_id!="67")].copy() # exclude bad cluster and slide

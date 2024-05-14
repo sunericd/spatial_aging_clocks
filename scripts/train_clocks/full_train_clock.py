@@ -26,6 +26,9 @@ matplotlib.rcParams['ps.fonttype'] = 42
 from matplotlib.collections import PatchCollection
 import seaborn as sns
 
+import sys
+sys.path.append("/".join(os.getcwd().split("/")[:-2]))
+
 from clock_preprocessing import *
 import argparse
 parser = argparse.ArgumentParser()
@@ -34,12 +37,11 @@ args = parser.parse_args()
 
 method = args.method
 
+os.chdir("../..")
 
-os.chdir("..")
 
 # read data and init
 adata = sc.read_h5ad("data/integrated_aging_coronal_celltyped_regioned_raw.h5ad")
-adata = adata[(adata.obs.clusters!="1")&(adata.obs.mouse_id!="89")&(adata.obs.mouse_id!="67")].copy()
 
 
 
