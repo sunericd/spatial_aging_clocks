@@ -86,9 +86,9 @@ Jupyter notebooks containing code for making figures and running simulations for
 - ```6E_immunofluorescence_proximity_analysis.ipynb``` - analysis of immunofluorescence images for validating cell proximity effect mediators
 
 
-### 7. Reproducibility on independent cohorts
+### 7. Reproducibility tests
 - ```7A_batch_separated_reproducibility.ipynb``` - miscellaneous analyses using the two independent cohorts of the coronal section dataset separately
-
+- ```7B_segmentation_spillover_checks.ipynb``` - miscellaneous analyses using a filtered subset of 220 genes with lower transcript misallocation (spillover) rates
 
 ## Overview of helper functions
 

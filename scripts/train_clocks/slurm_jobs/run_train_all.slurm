@@ -13,4 +13,5 @@ source activate merfish
 python full_train_clock.py single_cell
 python full_train_clock.py pseudobulk_random
 python full_train_clock.py spatial_smooth
+python full_train_clock.py spatial_smooth_minus80
 source deactivate

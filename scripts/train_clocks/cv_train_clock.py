@@ -210,3 +210,48 @@ if method == "spatial_smooth_onsinglecell":
     adata.obs['predicted_age'] = predicted_ages_all
 
     adata.write_h5ad("results/clocks/anndata/lasso_loocv_predicted_age_correlation_n30_spatialsmoothonsinglecell_alpha08_nneigh20.h5ad")
+
+
+# spatial smooth (remove higher spillover/misallocation rate genes)
+if method == "spatial_smooth_minus80":
+    
+    exclude_markers = ['Gfap', 'Crym', 'Drd2', 'Nr4a2', 'Ighm', 'Slc17a7', 'Aldoc', 'Adora2a', 'Cd4', 'C1ql3', 'Stmn2', 'Pvalb', 'Thbs4', 'Gja1', 'Atp1a2', 'C4b', 'Drd1', 'Lamp5', 'Slc1a2', 'Sparc', 'Map1lc3a', 'Tox', 'Penk', 'Gad2', 'Chat', 'Apoe', 'Aqp4', 'Sulf2', 'Sox9', 'Clu', 'Tubb3', 'Slc32a1', 'Aldh1l1', 'Spock2', 'Nfic', 'Olig1', 'Flt1', 'Pbx3', 'Pdgfra', 'Adamts3', 'Tac1', 'Cdh2', 'Slc1a3', 'Agpat3', 'Fgfr3', 'Msmo1', 'Ntm', 'Efnb2', 'Apod', 'Cd47', 'Gad1', 'Cdk5r1', 'Cfl1', 'Jak1', 'Sst', 'Sox2', 'Dpp6', 'Stub1', 'Igf2', 'Elovl5', 'Fads2', 'Trim2', 'Syt11', 'C1qa', 'Npy', 'Htt', 'Pcsk1n', 'Akt1', 'Csf1r', 'Igf1r', 'Sox11', 'Slc17a6', 'Mtor', 'C1qb', 'Sod2', 'Btg2', 'Gpm6b', 'Vcam1', 'Nr2e1', 'Parp1']
+    adata = adata[:,[gene for gene in adata.var_names if gene not in exclude_markers]]
+    print(adata.shape)
+    
+    for ct in celltypes:
+        
+        sub_adata = adata[adata.obs["celltype"]==ct,:].copy()
+        sub_adata = normalize_adata(sub_adata, zscore=False)
+        
+        cv_iterator = get_cv_iterator(sub_adata, "mouse_id")
+            
+        # cross-validated predictions
+        predicted_ages = np.ones(sub_adata.shape[0])*np.nan
+
+        for (train_idxs, test_idxs) in cv_iterator:
+            
+            tr_adata = sub_adata[train_idxs,:].copy()
+            te_adata = sub_adata[test_idxs,:].copy()
+            
+            # Smooth
+            tr_adata = spatial_smoothing_expression(tr_adata, alpha=0.8, n_neighbors=20, max_iter=30, tol=1e-2)
+            
+            model = LassoCV(cv=5, n_alphas=20, max_iter=10000)
+            scaler = StandardScaler()
+            pipeline = Pipeline([('transformer', scaler), ('estimator', model)])
+            
+            # Train
+            pipeline.fit(np.array(tr_adata.X).astype('float64'), tr_adata.obs['age'].values.astype('float64'))
+            
+            # Test
+            te_adata = spatial_smoothing_expression(te_adata, alpha=0.8, n_neighbors=20, max_iter=30, tol=1e-2)
+            pred_ages = pipeline.predict(np.array(te_adata.X).astype('float64'))
+            predicted_ages[test_idxs] = pred_ages
+        
+        # update adata with predicted age
+        predicted_ages_all[adata.obs["celltype"]==ct] = predicted_ages
+        
+    adata.obs['predicted_age'] = predicted_ages_all
+
+    adata.write_h5ad("results/clocks/anndata/lasso_loocv_predicted_age_correlation_n30_spatialsmoothonsmooth_alpha08_nneigh20_minus80.h5ad")

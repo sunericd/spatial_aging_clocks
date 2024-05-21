@@ -11,4 +11,5 @@
 
 source activate merfish
 python cv_train_clock.py spatial_smooth_all
+python cv_train_clock.py spatial_smooth_minus80
 source deactivate
