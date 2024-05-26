@@ -94,7 +94,7 @@ def get_mouse_type_region_exp(adata, cur_region, cur_ctype, cur_mice, num_cells_
     return returned_exp_df
 
 
-def region_dysfunction(data_path, fig_dir):
+def region_dysfunction(data_path, fig_dir, drop_genes=True):
     '''
     Calculates the transcriptional changes with aging for different cell types in different regions of the mouse brain.
     Inputs:
@@ -104,6 +104,13 @@ def region_dysfunction(data_path, fig_dir):
             - the region for which the transcriptional profile is calculated.
     '''
     adata = ad.read_h5ad(data_path)
+    
+    # drop genes
+    if drop_genes is True:
+        exclude_markers = ['Gfap', 'Crym', 'Drd2', 'Nr4a2', 'Ighm', 'Slc17a7', 'Aldoc', 'Adora2a', 'Cd4', 'C1ql3', 'Stmn2', 'Pvalb', 'Thbs4', 'Gja1', 'Atp1a2', 'C4b', 'Drd1', 'Lamp5', 'Slc1a2', 'Sparc', 'Map1lc3a', 'Tox', 'Penk', 'Gad2', 'Chat', 'Apoe', 'Aqp4', 'Sulf2', 'Sox9', 'Clu', 'Tubb3', 'Slc32a1', 'Aldh1l1', 'Spock2', 'Nfic', 'Olig1', 'Flt1', 'Pbx3', 'Pdgfra', 'Adamts3', 'Tac1', 'Cdh2', 'Slc1a3', 'Agpat3', 'Fgfr3', 'Msmo1', 'Ntm', 'Efnb2', 'Apod', 'Cd47', 'Gad1', 'Cdk5r1', 'Cfl1', 'Jak1', 'Sst', 'Sox2', 'Dpp6', 'Stub1', 'Igf2', 'Elovl5', 'Fads2', 'Trim2', 'Syt11', 'C1qa', 'Npy', 'Htt', 'Pcsk1n', 'Akt1', 'Csf1r', 'Igf1r', 'Sox11', 'Slc17a6', 'Mtor', 'C1qb', 'Sod2', 'Btg2', 'Gpm6b', 'Vcam1', 'Nr2e1', 'Parp1']
+        adata = adata[:,[gene for gene in adata.var_names if gene not in exclude_markers]]
+        print(adata.shape)
+    
     adata.obs['mouse_id'] = ['mouse' + x for x in adata.obs['mouse_id']]
     all_regions_num_cells = get_mouse_type_region_num_cells(adata)
 
@@ -215,7 +222,7 @@ if __name__ == '__main__':
 
 # JUST PLOT
 df_for_plot = pd.read_csv("results/dgea/genes_de_by_region_plotdf.csv")
-regions_ordered = ['CC/ACO', 'CTX_L1/MEN', 'CTX_L2/3', 'CTX_L4/5/6', 'STR_CP/ACB', 'STR_LS/NDB'] # removed VEN since low # of cells
+regions_ordered = ['CTX_L1/MEN', 'CTX_L2/3', 'CTX_L4/5/6', 'STR_CP/ACB', 'STR_LS/NDB', 'CC/ACO'] # removed VEN since low # of cells
 celltype_palette = {'Neuron-Excitatory':'forestgreen',
                         'Neuron-Inhibitory':'lightgreen',
                         'Neuron-MSN':'yellowgreen',
@@ -241,10 +248,10 @@ df_for_plot["ctype"] = df_for_plot["ctype"].astype('category').cat.reorder_categ
 
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
-sns.catplot(data=df_for_plot, x='abs_diff', y='region', hue='ctype', kind='bar', palette=celltype_palette, order=regions_ordered,
-            height=8, aspect=5/8)
-plt.ylabel("Subregion", fontsize=18)
-plt.xlabel("Mean Log2 Fold Change in Expression", fontsize=18)
-plt.xticks(fontsize=16)
+sns.catplot(data=df_for_plot, x='region', y='abs_diff', hue='ctype', kind='bar', palette=celltype_palette, order=regions_ordered,
+            height=4, aspect=7/4)
+plt.xlabel("Subregion", fontsize=18)
+plt.ylabel("Mean Log2 Fold Change in Expression", fontsize=18)
+plt.xticks(fontsize=16, rotation=90)
 plt.yticks(fontsize=16)
 plt.savefig('plots/dgea/genes_de_by_region_and_ctype.pdf')
