@@ -24,6 +24,7 @@ def get_predictions(adata,
                     pseudobulk_data=False,
                     normalize=True,
                     standardize=True,
+                    scale_ref_data=False,
                     add_in_place=True):
     '''
     Gets predicted ages and adds to adata.obs["predicted_age"] inplace
@@ -36,6 +37,7 @@ def get_predictions(adata,
         smooth [bool] - whether to smooth ; change to False if no adata.obsm["spatial"] in adata
         pseudobulk_data [bool] - if smooth is False, whether to pseudobulk data instead
         standardize [bool] - whether to standardize data using the pipeline in the pkl files
+        scale_ref_data [bool] - whether to scale the reference data before imputation (this should be done if adata.X is scaled)
         add_in_place [bool] - whether to add predictions to adata.obs["predicted_age"] inplace
        
     Returns:
@@ -71,6 +73,8 @@ def get_predictions(adata,
 
             # load training data to get genes -- normalized and smoothed but not standardized
             tr_adata = sc.read_h5ad(f"results/clocks/{clock_obj_name}_{ct}.h5ad")
+            if scale_ref_data is True: # scale training data for imputation
+                sc.pp.scale(tr_adata)
             clock_genes = tr_adata.var_names.copy()    
 
             # subset into shared genes
