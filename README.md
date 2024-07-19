@@ -66,6 +66,7 @@ Jupyter notebooks containing code for making figures and running simulations for
 
 
 ### 5. Cell proximity effects
+- ```5A_cell_proximity_differential_expression.ipynb``` - differential expression and labeling of T cell and NSC marker genes for Near vs Far comparisons (regular proximity effect and area-restricted proximity effect)
 - ```5A_cell_proximity_equality_of_variances.ipynb``` - Levene's test for age acceleration between near and far cells
 - ```5A_regional_proximity_distance_cutoffs.ipynb``` - determination of unit distance cutoffs for proximity analysis
 - ```5B_cell_proximity_aging_analysis.ipynb``` - calculation and analysis of proximity effects
