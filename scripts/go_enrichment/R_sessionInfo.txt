@@ -1,0 +1,42 @@
+R version 4.3.3 (2024-02-29)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: CentOS Linux 7 (Core)
+
+Matrix products: default
+BLAS/LAPACK: /usr/lib64/libopenblas-r0.3.3.so;  LAPACK version 3.8.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
+
+time zone: America/Los_Angeles
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods
+[8] base
+
+other attached packages:
+ [1] writexl_1.5.0        readxl_1.4.3         org.Mm.eg.db_3.18.0
+ [4] topGO_2.54.0         SparseM_1.81         GO.db_3.18.0
+ [7] AnnotationDbi_1.64.1 IRanges_2.36.0       S4Vectors_0.40.2
+[10] Biobase_2.62.0       graph_1.80.0         BiocGenerics_0.48.1
+
+loaded via a namespace (and not attached):
+ [1] bit_4.0.5               compiler_4.3.3          crayon_1.5.2
+ [4] blob_1.2.4              bitops_1.0-7            Biostrings_2.70.3
+ [7] png_0.1-8               fastmap_1.1.1           lattice_0.22-5
+[10] R6_2.5.1                XVector_0.42.0          GenomeInfoDb_1.38.8
+[13] tibble_3.2.1            GenomeInfoDbData_1.2.11 DBI_1.2.2
+[16] pillar_1.9.0            rlang_1.1.3             utf8_1.2.4
+[19] KEGGREST_1.42.0         cachem_1.0.8            bit64_4.0.5
+[22] RSQLite_2.3.6           memoise_2.0.1           cli_3.6.2
+[25] magrittr_2.0.3          zlibbioc_1.48.2         grid_4.3.3
+[28] lifecycle_1.0.4         vctrs_0.6.5             glue_1.7.0
+[31] cellranger_1.1.0        RCurl_1.98-1.14         fansi_1.0.6
+[34] httr_1.4.7              matrixStats_1.3.0       tools_4.3.3
+[37] pkgconfig_2.0.3
