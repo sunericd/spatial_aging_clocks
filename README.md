@@ -1,5 +1,7 @@
 # Spatiotemporal transcriptomic profiling and modeling of mouse brain at single-cell resolution reveals cell proximity effects of aging and rejuvenation
-This repository contains all Jupyter notebooks and Python scripts for generating data and figures associated with the manuscript.
+This repository contains all Jupyter notebooks and Python scripts for generating data and figures associated with the manuscript:
+
+**Sun ED, Zhou OY, Hauptschein M, Rappoport N, Xu L, Navarro Negredo P, Ling L, Rando TA, Zou J, Brunet A. Spatial transcriptomic clocks reveal cell proximity effects in brain ageing. *Nature* 638, 160–171 (2025). https://doi.org/10.1038/s41586-024-08334-8**
 
 If you are interested in applying our spatial aging clocks to make predictions or to perform cell proximity effect analysis, check out our Python package where you can do this in a few lines of code: https://github.com/sunericd/SpatialAgingClock
 
