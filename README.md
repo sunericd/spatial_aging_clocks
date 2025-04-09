@@ -17,7 +17,7 @@ git clone https://github.com/sunericd/spatial_aging_clocks.git
 cd spatial_aging_clocks
 ```
 
-Then, download our publicly released datasets from (Zenodo link embargoed) and put the .h5ad files into the home directory of this repository.
+Then, download our publicly released datasets from https://doi.org/10.5281/zenodo.13883176 and put the .h5ad files into the home directory of this repository.
 
 Finally, to get the public release of our data formatted for use with these notebooks, just run:
 
